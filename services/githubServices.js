@@ -5,7 +5,8 @@ const cmacc = require('cmacc-compiler');
 
 const fetch = require('node-fetch');
 
-const base = 'https://api.github.com';
+const base = process.env.ENDPOINT_BASE
+const apiBase = process.env.API_BASE
 
 const getCmacc = function (context, token) {
 
@@ -74,7 +75,7 @@ const getUser = (token) => {
 const getCommit = (context, token) => {
 
   const urlPath = path.join('repos', context.user, context.repo, 'commits', context.branch);
-  const location = url.resolve(base, urlPath);
+  const location = url.resolve(apiBase, urlPath);
 
   const opts = {
     headers: {
@@ -88,11 +89,11 @@ const getCommit = (context, token) => {
 };
 
 const getBranches = (context, token) => {
-  const base = 'https://api.github.com';
+
 
   const urlPath = path.join('repos', context.user, context.repo, 'branches');
 
-  const location = url.resolve(base, urlPath);
+  const location = url.resolve(apiBase, urlPath);
 
   const opts = {
     headers: {
@@ -108,7 +109,7 @@ const getBranches = (context, token) => {
 const saveCommit = (message, content, context, token) => {
 
   const urlPath = path.join('repos', context.user, context.repo, 'contents', context.path);
-  const location = url.resolve(base, urlPath);
+  const location = url.resolve(apiBase, urlPath);
 
   const opts = {
     headers: {
