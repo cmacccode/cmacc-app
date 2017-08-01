@@ -1,5 +1,5 @@
 const authServices = require('../services/authService');
-
+const path = require('path')
 const clientId = process.env.GITHUB_CLIENT_ID
 
 const base = process.env.ENDPOINT_BASE
@@ -22,7 +22,7 @@ const authRoute = (req, res, next) => {
   }
 
   if (!req.session['token']) {
-    const url = `${base}/login/oauth/authorize?scope=user:email,repo,gist,write:org&client_id=${clientId}`;
+    const url = path.join(`${base}`,`/login/oauth/authorize?scope=user:email,repo,gist,write:org&client_id=${clientId}`);
     req.session['redirect'] = req.path;
     return res.redirect(url);
   }

@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const querystring = require('querystring');
-
+const path = require('path')
 const clientId = process.env.GITHUB_CLIENT_ID
 const clientSecret = process.env.GITHUB_CLIENT_SECRET
 const redirectUri = process.env.GITHUB_REDIRECT_URI
@@ -17,7 +17,7 @@ const getToken = function (code) {
     code: code,
   };
 
-  const url = `${base}/login/oauth/access_token?` + querystring.stringify(input);
+  const url = path.join(`${base}`,`/login/oauth/access_token?` + querystring.stringify(input));
   const opts = {
     method: 'POST',
   };
